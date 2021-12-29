@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:task/colors.dart';
 import 'package:task/models/author.dart';
 import 'package:task/models/course.dart';
+import 'package:task/screens/budget_screen.dart';
 import 'package:task/widgets/widgets.dart';
 
 class ZhiftScreen extends StatelessWidget {
@@ -54,61 +55,69 @@ class ZhiftScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: ListView(
+        body: TabBarView(
           children: [
-            const HeadingRow(title: 'IN PROGRESS'),
-            SizedBox(
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                children: const [
-                  ProgressCard(
-                    title: 'Learning Figma',
-                    author: 'Gustavo Franco',
-                    percent: 83,
+            ListView(
+              children: [
+                const HeadingRow(title: 'IN PROGRESS'),
+                SizedBox(
+                  height: 100,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    children: const [
+                      ProgressCard(
+                        title: 'Learning Figma',
+                        author: 'Gustavo Franco',
+                        percent: 83,
+                      ),
+                      ProgressCard(
+                        title: 'Learning Figma',
+                        author: 'Gustavo Franco',
+                        percent: 83,
+                      ),
+                      ProgressCard(
+                        title: 'Learning Figma',
+                        author: 'Gustavo Franco',
+                        percent: 83,
+                      ),
+                      ProgressCard(
+                        title: 'Learning Figma',
+                        author: 'Gustavo Franco',
+                        percent: 83,
+                      ),
+                    ],
                   ),
-                  ProgressCard(
-                    title: 'Learning Figma',
-                    author: 'Gustavo Franco',
-                    percent: 83,
+                ),
+                const HeadingRow(title: 'FAVORITE MENTOR'),
+                SizedBox(
+                  height: 140,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: authors.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return AuthorCard(author: authors[index]);
+                    },
                   ),
-                  ProgressCard(
-                    title: 'Learning Figma',
-                    author: 'Gustavo Franco',
-                    percent: 83,
+                ),
+                const HeadingRow(title: 'COURSE FOR YOU'),
+                SizedBox(
+                  height: 232,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return CourseCard(course: courses[index]);
+                    },
                   ),
-                  ProgressCard(
-                    title: 'Learning Figma',
-                    author: 'Gustavo Franco',
-                    percent: 83,
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
-            const HeadingRow(title: 'FAVORITE MENTOR'),
-            SizedBox(
-              height: 140,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: authors.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return AuthorCard(author: authors[index]);
-                },
-              ),
-            ),
-            const HeadingRow(title: 'COURSE FOR YOU'),
-            SizedBox(
-              height: 232,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: courses.length,
-                itemBuilder: (context, index) {
-                  return CourseCard(course: courses[index]);
-                },
-              ),
-            )
+            Icon(Icons.directions_car),
+            Icon(Icons.directions_transit),
+            Icon(Icons.directions_bike),
+            BudgetScreen(),
           ],
         ),
         bottomNavigationBar: const TabBar(

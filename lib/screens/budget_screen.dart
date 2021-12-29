@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task/colors.dart';
 import 'package:task/models/budget_entry.dart';
+import 'package:task/screens/screens.dart';
 
 class BudgetScreen extends StatelessWidget {
   const BudgetScreen({Key? key}) : super(key: key);
@@ -43,13 +44,21 @@ class BudgetScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(12),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          children: budgetEntries
-              .map((budgetEntry) => ExpenditureCard(budgetEntry: budgetEntry))
-              .toList(),
+        body: TabBarView(
+          children: [
+            ListView(
+              padding: const EdgeInsets.all(12),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              children: budgetEntries
+                  .map((budgetEntry) =>
+                      ExpenditureCard(budgetEntry: budgetEntry))
+                  .toList(),
+            ),
+            Tab(icon: Icon(Icons.home)),
+            Tab(icon: Icon(Icons.content_copy)),
+            ZhiftScreen(),
+          ],
         ),
         bottomNavigationBar: const TabBar(
           indicatorSize: TabBarIndicatorSize.label,
